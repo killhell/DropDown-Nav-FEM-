@@ -1,0 +1,390 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --AlmostWhite: hsl(0, 0%, 98%);
+  --MediumGray: hsl(0, 0%, 41%);
+  --AlmostBlack: hsl(0, 0%, 8%);
+  --navheight: 60px;
+}
+
+body {
+  font-family: "Epilogue";
+  font-weight: 500;
+  padding-inline: 3%;
+  background: var(--AlmostWhite);
+}
+
+/* Navbar */
+
+nav {
+  height: var(--navheight);
+}
+
+a {
+  text-decoration: none;
+  color: var(--MediumGray);
+  font-size: 14px;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px;
+  border: none;
+  background: none;
+  color: var(--MediumGray);
+}
+
+button:hover {
+  color: var(--AlmostBlack);
+  font-weight: 700;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+
+.navcontainer {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.links {
+  display: flex;
+  gap: 15px;
+  flex-grow: 1;
+}
+
+.btns {
+  display: flex;
+  gap: 20px;
+}
+
+.register {
+  margin-left: 20px;
+  padding-block: 10px;
+  padding-inline: 20px;
+  border: 2px solid var(--MediumGray);
+  border-radius: 20px;
+}
+
+.register:hover {
+  border: 2px solid var(--AlmostBlack);
+}
+
+.feature,
+.company {
+  cursor: pointer;
+  position: relative;
+}
+
+a:hover {
+  color: var(--AlmostBlack);
+  font-weight: 700;
+}
+
+.feature[data-open="open"] .feature-dropList {
+  position: absolute;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  padding-block: 10px;
+  padding-inline: 20px;
+  border-radius: 15px;
+  gap: 10px;
+  right: 0;
+  top: 40px;
+  width: max-content;
+  animation: fade-in 0.5s forwards;
+}
+
+.box {
+  margin-bottom: 10px;
+}
+
+.box img {
+  margin-right: 10px;
+}
+
+.box a {
+  padding-block: auto;
+}
+
+.company[data-open="open"] .company-dropList {
+  position: absolute;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  padding-block: 10px;
+  padding-inline: 20px;
+  border-radius: 15px;
+  flex-direction: column;
+  gap: 10px;
+  left: 0;
+  top: 40px;
+  width: 120px;
+  animation: fade-in 0.5s forwards;
+}
+
+.drop {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.feature[data-open="close"] .feature-dropList,
+.company[data-open="close"] .company-dropList {
+  display: none;
+}
+
+.feature[data-open="open"] .drop > img,
+.company[data-open="open"] .drop > img {
+  animation: rotate 0.5s forwards;
+}
+
+.feature[data-open="close"] .drop > img,
+.company[data-open="close"] .drop > img {
+  animation: rotatex 0.5s forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes rotatex {
+  0% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+#toggler {
+  cursor: pointer;
+  display: none;
+  width: 18px;
+  aspect-ratio: 1;
+  z-index: 999;
+}
+
+@media screen and (max-width: 768px) {
+  nav {
+    padding-inline: 3%;
+  }
+
+  #toggler {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    display: block;
+    background: url(images/icon-menu.svg);
+    background-repeat: no-repeat;
+  }
+
+  .navcontainer {
+    position: fixed;
+    inset: 0 0 0 50%;
+    flex-direction: column;
+    align-items: flex-start;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    padding-top: 10%;
+  }
+
+  .register {
+    width: 70%;
+  }
+
+  .btns {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .links {
+    flex-direction: column;
+    flex-grow: 0;
+    margin-bottom: 50px;
+    padding-left: 30px;
+  }
+
+  .feature[data-open="open"] .feature-dropList,
+  .company[data-open="open"] .company-dropList {
+    position: static;
+    box-shadow: none;
+    animation: none;
+  }
+
+  .feature[data-open="close"] .feature-dropList,
+  .company[data-open="close"] .company-dropList {
+    display: none;
+  }
+
+  nav[data-nav="close"] .navcontainer {
+    transform: translateX(100%);
+    transition: 0.5s ease-in-out;
+  }
+
+  nav[data-nav="open"] .navcontainer {
+    transform: translateX(0);
+    transition: 0.5s ease-in-out;
+  }
+
+  a:hover,
+  button:hover {
+    color: var(--MediumGray);
+    font-weight: inherit;
+  }
+}
+
+/* Section */
+
+section {
+  margin-bottom: 30px;
+}
+
+.hero {
+  padding-inline: 50px;
+  display: flex;
+  gap: 80px;
+}
+
+.hero > * {
+  width: 100%;
+}
+
+.hero picture > img {
+  width: 100%;
+}
+
+.herobox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.herotext {
+  margin-top: 30%;
+}
+
+.herobox h1 {
+  font-size: 80px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.herobox p {
+  width: 60%;
+  color: var(--MediumGray);
+  margin-bottom: 40px;
+}
+
+.herobox button {
+  border: 2px solid var(--AlmostBlack);
+  width: 180px;
+  background: var(--AlmostBlack);
+  padding-block: 13px;
+  border-radius: 15px;
+  color: var(--AlmostWhite);
+  font-weight: 700;
+  font-size: 20px;
+  transition: 0.25s ease-in-out;
+}
+
+.herobox button:hover {
+  background: none;
+  color: var(--AlmostBlack);
+  border: 2px solid var(--MediumGray);
+}
+
+.brands {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: hsl(0 0% 8%/0.5);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(0 0% 8%/0.25);
+}
+
+@media screen and (max-width: 768px) {
+  /* width */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  body {
+    padding-inline: 0;
+  }
+
+  .hero {
+    flex-direction: column-reverse;
+    gap: 20px;
+    padding-inline: 0;
+  }
+
+  .herotext {
+    text-align: center;
+    margin-top: 5%;
+  }
+
+  .herotext h1 {
+    font-size: 40px;
+  }
+
+  .herotext p {
+    width: 100%;
+    padding-inline: 10%;
+  }
+
+  .brands {
+    padding-inline: 5px;
+    gap: 0;
+    justify-content: space-between;
+    margin-top: 100px;
+  }
+}
